@@ -8,6 +8,11 @@ import Foundation
 
 class ${domainClass.name} : NSObject {
 
+    <#list domainClass.properties as property>
+    var ${property.name} : ${property.type}
+
+    </#list>
+
 }
 </&output>
 </#list>
