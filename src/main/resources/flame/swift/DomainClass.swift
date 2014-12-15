@@ -9,7 +9,7 @@ import Foundation
 class ${domainClass.name} : NSObject {
 
     <#list domainClass.properties as property>
-    var ${property.name} : ${property.type.name}
+    var ${property.name} : ${property.type}
 
     </#list>
 
@@ -25,7 +25,7 @@ class ${domainClass.name} : NSObject {
 
 class ${action.name}Action : NSObject {
 
-    class func perform(<#list action.inputs as input>${input.name} : ${input.type.name}<#if input_has_next>, </#if></#list>) {
+    class func perform(<#list action.inputs as input>${input.name} : ${input.type}<#if input_has_next>, </#if></#list>) {
         // add your implementation here
     }
 
