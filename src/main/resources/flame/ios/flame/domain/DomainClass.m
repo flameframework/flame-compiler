@@ -9,6 +9,10 @@
 
 @implementation ${domainClass.name}
 
+<#list domainClass.properties as property>
+    @synthesize ${property.name};
+
+</#list>
 
 @end
 </&output>

@@ -9,7 +9,7 @@
 
 @implementation ${action.name}Action
 
-+ (${action.outputType}) perform<#list action.inputVariables as input>${input.name}: (${input.type}) ${input.name}<#if input_has_next> </#if></#list> {
++ (${action.outputType}*) perform<#list action.inputVariables as input>${input.name}: (${input.type}*) ${input.name}<#if input_has_next> </#if></#list> {
     // add your implementation here
 }
 

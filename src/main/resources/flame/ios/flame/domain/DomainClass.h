@@ -10,6 +10,11 @@
 
 @interface ${domainClass.name} : NSManagedObject
 
+<#list domainClass.properties as property>
+    @property ${property.type} *${property.name};
+
+</#list>
+
 @end
 </&output>
 </#list>
