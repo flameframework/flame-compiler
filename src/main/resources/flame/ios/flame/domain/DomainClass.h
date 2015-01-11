@@ -11,8 +11,7 @@
 @interface ${domainClass.name} : NSManagedObject
 
 <#list domainClass.properties as property>
-    @property ${property.type} *${property.name};
-
+@property (nonatomic, retain) ${property.type} * ${property.name};
 </#list>
 
 @end

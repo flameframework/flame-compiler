@@ -10,8 +10,7 @@
 @implementation ${domainClass.name}
 
 <#list domainClass.properties as property>
-    @synthesize ${property.name};
-
+@dynamic ${property.name};
 </#list>
 
 @end
