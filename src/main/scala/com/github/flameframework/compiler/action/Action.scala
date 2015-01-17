@@ -1,13 +1,13 @@
 package com.github.flameframework.compiler.action
 
-import com.github.flameframework.compiler.domain.{Variable, Type}
+import com.github.flameframework.compiler.domain.{Descriptor, Variable, Type}
 
 import scala.collection.JavaConversions._
 
 /**
  * Created by michel on 13-12-14.
  */
-class Action(name: String,
+class Action(name: Descriptor[Action],
                       inputVariables: java.util.List[Variable] = Nil,
                       outputType: Type = null) {
 
@@ -19,7 +19,7 @@ class Action(name: String,
 
 object Action {
 
-  def apply(name: String, inputVariables: Seq[Variable] = Nil, outputType: Option[Type] = None) =
-    new Action(name, inputVariables, outputType.orNull)
+  def apply(description: String, inputVariables: Seq[Variable] = Nil, outputType: Option[Type] = None) =
+    new Action(Descriptor(classOf[Action], description), inputVariables, outputType.orNull)
 
 }

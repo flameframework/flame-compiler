@@ -5,7 +5,7 @@ import scala.collection.JavaConversions._
 /**
  * Abstract representation for a domain object.
  */
-class DomainClass(name : String, properties: java.util.List[Variable]) extends Type {
+class DomainClass(name : Descriptor[DomainClass], properties: java.util.List[Variable]) extends Type {
 
   def getName = name
   def getProperties = properties
@@ -14,6 +14,6 @@ class DomainClass(name : String, properties: java.util.List[Variable]) extends T
 
 object DomainClass {
 
-  def apply(name: String, properties : Seq[Variable] = Nil) = new DomainClass(name, properties)
+  def apply(description: String, properties : Seq[Variable] = Nil) = new DomainClass(Descriptor(classOf[DomainClass], description), properties)
 
 }
