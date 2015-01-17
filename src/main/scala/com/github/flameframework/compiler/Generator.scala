@@ -19,7 +19,7 @@ object Generator {
     val from = Variable("from", StringType)
     val to = Variable("to", StringType)
     val body = Variable("body", StringType)
-    val Mail = DomainClass("Mail", Seq(from, to, body))
+    val Mail = DomainClass("mail", Seq(from, to, body))
     val mail = Variable("mail", Mail)
 
     val mails = Variable("mails", ListType(Mail))
@@ -28,14 +28,14 @@ object Generator {
 
     val obj = Variable("object", ListType(Mail))
 
-    val refresh = Action("RefreshInbox", inputVariables = Seq(inbox), outputType = Some(IntegerType))
-    val view = Action("View", inputVariables = Seq(obj), outputType = Some(IntegerType))
+    val refresh = Action("refresh inbox", inputVariables = Seq(inbox), outputType = Some(IntegerType))
+    val view = Action("view", inputVariables = Seq(obj), outputType = Some(IntegerType))
 
-    val open = ComposedAction("OpenInbox", inputVariables = Seq(inbox),
-      outputVariable = Some(Variable("newItemCount", IntegerType)),
+    val open = ComposedAction("open inbox", inputVariables = Seq(inbox),
+      outputVariable = Some(Variable("new item count", IntegerType)),
       actionCalls = Seq(
       ActionCall(refresh, Seq(inbox)),
-      ActionCall(view, Seq(PropertyValue(inbox, mails)), Some(Variable("newItemCount", IntegerType)))
+      ActionCall(view, Seq(PropertyValue(inbox, mails)), Some(Variable("new item count", IntegerType)))
     ))
 
     generate("ios", "../flame-ios/flame-ios", InteractionModel(
