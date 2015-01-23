@@ -16,14 +16,11 @@
 
 package com.github.flameframework.compiler.domain
 
-import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
 
 /**
  * Created by michel on 12-01-15.
  */
-@RunWith(classOf[JUnitRunner])
 class DescriptorTest extends FlatSpec {
 
   trait Fixture {

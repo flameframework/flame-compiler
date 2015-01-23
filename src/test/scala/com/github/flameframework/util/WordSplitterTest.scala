@@ -17,14 +17,11 @@
 package com.github.flameframework.util
 
 import com.github.flameframework.util.WordSplitter._
-import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
 
 /**
  * Created by michel on 16-01-15.
  */
-@RunWith(classOf[JUnitRunner])
 class WordSplitterTest extends FlatSpec {
 
   "Words separated by spaces" should "be split into separate words" in {
