@@ -54,7 +54,7 @@ object Generator {
       ActionCall(view, Seq(PropertyValue(inbox, mails)), Some(Variable("new item count", IntegerType)))
     ))
 
-    generate("ios", "../flame-ios/flame-ios", InteractionModel(
+    generate("ios", "flame-ios/flame-ios", InteractionModel(
       Seq(Inbox, Mail),
       Seq(refresh, view),
       Seq(open)
