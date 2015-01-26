@@ -5,15 +5,15 @@
 //
 
 <#list domainClasses as domainClass>
-#include "flame/domain/${domainClass.name}.h"
+#include "generated/domain/${domainClass.name}.h"
 </#list>
 
 <#list composedActions as action>
-#include "flame/actions/composed/${action.name}Action.h"
+#include "generated/composed/${action.name}Action.h"
 </#list>
 
 <#list nativeActions as action>
-#include "flame/actions/native/${action.name}Action.h"
+#include "generated/headers/${action.name}Action.h"
 </#list>
 
 </&output>

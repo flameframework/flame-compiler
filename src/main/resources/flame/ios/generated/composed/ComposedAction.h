@@ -6,7 +6,7 @@
 
 @interface ${action.name}Action : NSObject
 
-+ (${action.outputType}*) perform<#list action.inputVariables as input>${input.name.toUpperCamelCase}: (${input.type}*) ${input.name}<#if input_has_next> </#if></#list>;
++ (${action.outputType}) perform<#list action.inputVariables as input>${input.name.toUpperCamelCase}: (${input.type}) ${input.name}<#if input_has_next> </#if></#list>;
 
 @end
 </&output>

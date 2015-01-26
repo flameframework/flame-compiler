@@ -25,17 +25,17 @@ import scala.collection.JavaConversions._
  */
 class ComposedAction(description: String,
                       inputVariables: java.util.List[Variable],
-                      outputVariable: Variable,
-                      actionCalls: java.util.List[ActionCall]) extends Action(description, inputVariables, outputVariable.getType) {
+                      outputVariable: Option[Variable],
+                      actionCalls: java.util.List[ActionCall]) extends Action(description, inputVariables, outputVariable.map(_.getType).getOrElse(VoidType)) {
 
   val getActionCalls = actionCalls
-  val getOutputVariable = outputVariable
+  val getOutputVariable = outputVariable.orNull
 
 }
 
 object ComposedAction {
 
   def apply(description: String, inputVariables: Seq[Variable] = Nil, outputVariable: Option[Variable] = None, actionCalls: Seq[ActionCall]) =
-    new ComposedAction(description, inputVariables, outputVariable.orNull, actionCalls)
+    new ComposedAction(description, inputVariables, outputVariable, actionCalls)
 
 }

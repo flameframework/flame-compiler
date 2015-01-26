@@ -16,7 +16,7 @@
 
 package com.github.flameframework.compiler
 
-import com.github.flameframework.compiler.action.{Action, ActionCall, ComposedAction, InteractionModel}
+import com.github.flameframework.compiler.action._
 import com.github.flameframework.compiler.domain._
 import com.github.flameframework.treemarker.TreeMarker
 
@@ -35,28 +35,21 @@ object Generator {
     val from = Variable("from", StringType)
     val to = Variable("to", StringType)
     val body = Variable("body", StringType)
+
     val Mail = DomainClass("mail", Seq(from, to, body))
-    val mail = Variable("mail", Mail)
 
     val mails = Variable("mails", ListType(Mail))
-    val Inbox = DomainClass("Inbox", Seq(mails))
-    val inbox = Variable("inbox", Inbox)
 
-    val obj = Variable("object", ListType(Mail))
+    val fetchAllMails = Action("fetch all mails", outputType = Some(ListType(Mail)))
 
-    val refresh = Action("refresh inbox", inputVariables = Seq(inbox), outputType = Some(IntegerType))
-    val view = Action("view", inputVariables = Seq(obj), outputType = Some(IntegerType))
-
-    val open = ComposedAction("open inbox", inputVariables = Seq(inbox),
-      outputVariable = Some(Variable("new item count", IntegerType)),
-      actionCalls = Seq(
-      ActionCall(refresh, Seq(inbox)),
-      ActionCall(view, Seq(PropertyValue(inbox, mails)), Some(Variable("new item count", IntegerType)))
+    val open = ComposedAction("open inbox", actionCalls = Seq(
+      ActionCall(fetchAllMails, outputVariable = Some(mails)),
+      ActionCall(ListAction, Seq(mails))
     ))
 
     generate("ios", "flame-ios/flame-ios", InteractionModel(
-      Seq(Inbox, Mail),
-      Seq(refresh, view),
+      Seq(Mail),
+      Seq(fetchAllMails),
       Seq(open)
     ))
   }

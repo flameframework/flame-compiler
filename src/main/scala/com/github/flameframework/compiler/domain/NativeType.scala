@@ -23,3 +23,5 @@ trait NativeType extends Type
 
 case object StringType extends NativeType
 case object IntegerType extends NativeType
+case object ObjectType extends NativeType
+case object VoidType extends NativeType
