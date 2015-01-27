@@ -9,8 +9,9 @@
 
 @implementation ${domainClass.name}
 
+@synthesize label;
 <#list domainClass.properties as property>
-@dynamic ${property.name};
+@synthesize ${property.name};
 </#list>
 
 @end

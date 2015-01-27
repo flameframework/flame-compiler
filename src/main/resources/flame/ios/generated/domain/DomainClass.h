@@ -6,10 +6,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "flamelib.h"
 
+@interface ${domainClass.name} : NSObject<DomainObject>
 
-@interface ${domainClass.name} : NSManagedObject
-
+@property (nonatomic, retain) NSString* label;
 <#list domainClass.properties as property>
 @property (nonatomic, retain) ${property.type} ${property.name};
 </#list>
