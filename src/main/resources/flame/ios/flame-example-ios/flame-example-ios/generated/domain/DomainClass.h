@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "flamelib.h"
+#import <FlameEngine/FlameEngine.h>
 
 @interface ${domainClass.name} : NSObject<DomainObject>
 

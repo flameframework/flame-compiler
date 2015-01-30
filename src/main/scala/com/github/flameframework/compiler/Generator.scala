@@ -47,7 +47,7 @@ object Generator {
       ActionCall(ListAction, Seq(mails))
     ))
 
-    generate("ios", "flame-ios/flame-ios", InteractionModel(
+    generate("ios", ".", InteractionModel(
       Seq(Mail),
       Seq(fetchAllMails),
       Seq(open)

@@ -1,0 +1,8 @@
+<#-- TODO remove necessity to add &output tag here -->
+<&output file=".gitignore" overwrite="false">
+xcuserdata
+project.xcworkspace
+generated
+generated.h
+generated.m
+</&output>
