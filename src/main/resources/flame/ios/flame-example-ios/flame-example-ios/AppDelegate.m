@@ -29,7 +29,7 @@
     
     self.window.rootViewController = [NavigatorFactory sharedNavigator];
     
-    [OpenInboxAction perform]; // TODO: this should be configurable in the interaction model
+    [${appInfo.startAction} perform];
     
     [self.window makeKeyAndVisible];
     return YES;

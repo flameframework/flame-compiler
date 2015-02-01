@@ -23,10 +23,12 @@ import scala.collection.JavaConversions._
 /**
  * Created by michel on 16-11-14.
  */
-class InteractionModel (domainClasses : java.util.List[DomainClass] ,
+class InteractionModel (appInfo: AppInfo,
+                        domainClasses : java.util.List[DomainClass] ,
                         nativeActions: java.util.List[Action],
                         composedActions : java.util.List[ComposedAction]) {
 
+  def getAppInfo = appInfo
   def getDomainClasses = domainClasses
   def getNativeActions = nativeActions
   def getComposedActions = composedActions
@@ -35,7 +37,7 @@ class InteractionModel (domainClasses : java.util.List[DomainClass] ,
 
 object InteractionModel {
 
-  def apply(domainClasses: Seq[DomainClass], nativeActions : Seq[Action], composedActions: Seq[ComposedAction]) =
-    new InteractionModel(domainClasses, nativeActions, composedActions)
+  def apply(appInfo: AppInfo, domainClasses: Seq[DomainClass], nativeActions : Seq[Action], composedActions: Seq[ComposedAction]) =
+    new InteractionModel(appInfo, domainClasses, nativeActions, composedActions)
 
 }

@@ -47,7 +47,10 @@ object Generator {
       ActionCall(ListAction, Seq(mails))
     ))
 
+    val appInfo = AppInfo(startAction = open)
+
     generate("ios", ".", InteractionModel(
+      appInfo,
       Seq(Mail),
       Seq(fetchAllMails),
       Seq(open)
