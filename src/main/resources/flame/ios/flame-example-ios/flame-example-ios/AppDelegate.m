@@ -29,7 +29,7 @@
     
     self.window.rootViewController = [NavigatorFactory sharedNavigator];
     
-    [${appInfo.startAction} perform];
+    [${appInfo.startAction.name}Action perform];
     
     [self.window makeKeyAndVisible];
     return YES;

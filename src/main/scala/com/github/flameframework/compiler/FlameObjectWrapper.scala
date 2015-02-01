@@ -32,7 +32,6 @@ class FlameObjectWrapper(version: Version) extends DefaultObjectWrapper(version)
       case (typeObj: Type) => wrap(typeObj, asString(typeObj))
       case (value: Value) => wrap(value, asString(value))
       case (descriptor: Descriptor[_]) => wrap(descriptor, asString(descriptor))
-      case (action: Action) => wrap(action, asString(action.getName) + "Action")
       case _ => super.wrap(obj)
     }
 
