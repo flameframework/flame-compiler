@@ -23,19 +23,13 @@ import scala.collection.JavaConversions._
 /**
  * Created by michel on 13-12-14.
  */
-class ComposedAction(description: String,
-                      inputVariables: java.util.List[Variable],
-                      outputVariable: Option[Variable],
-                      actionCalls: java.util.List[ActionCall]) extends Action(description, inputVariables, outputVariable.map(_.getType).getOrElse(VoidType)) {
+case class ComposedAction(_description: String ,
+                      _inputVariables: Seq[Variable] = Nil,
+                      _outputVariable: Option[Variable] = None,
+                      _actionCalls: Seq[ActionCall]) extends Action(_description, _inputVariables, _outputVariable.map(_.getType)) {
 
-  val getActionCalls = actionCalls
-  val getOutputVariable = outputVariable.orNull
-
-}
-
-object ComposedAction {
-
-  def apply(description: String, inputVariables: Seq[Variable] = Nil, outputVariable: Option[Variable] = None, actionCalls: Seq[ActionCall]) =
-    new ComposedAction(description, inputVariables, outputVariable, actionCalls)
+  // getter methods returning plain Java objects for free marker
+  val getActionCalls : java.util.List[ActionCall] = _actionCalls
+  val getOutputVariable : Variable = _outputVariable.orNull
 
 }

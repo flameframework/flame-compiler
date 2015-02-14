@@ -14,15 +14,13 @@
  *    limitations under the License.
  */
 
-package com.github.flameframework.compiler.domain
+package com.github.flameframework.compiler.action
+
+import com.github.flameframework.compiler.domain.{Variable, Type}
 
 /**
- * Created by michel on 16-12-14.
+ * Created by michel on 13-12-14.
  */
-case class PropertyValue(_obj: Value, _property: Variable) extends Value {
-
-  // getter methods returning plain Java objects for free marker
-  val getObject = _obj
-  val getProperty = _property
-
-}
+case class NativeAction(_description: String,
+                      _inputVariables: Seq[Variable] = Nil,
+                      _outputType: Option[Type] = None) extends Action(_description, _inputVariables, _outputType)

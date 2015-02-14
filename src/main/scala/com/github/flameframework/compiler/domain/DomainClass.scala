@@ -21,17 +21,10 @@ import scala.collection.JavaConversions._
 /**
  * Abstract representation for a domain object.
  */
-class DomainClass(description: String, properties: java.util.List[Variable]) extends Type {
+case class DomainClass(_description: String, _properties: Seq[Variable] = Nil) extends Type {
 
-  private val descriptor = Descriptor(classOf[DomainClass], description)
-
-  def getName = descriptor
-  def getProperties = properties
-
-}
-
-object DomainClass {
-
-  def apply(description: String, properties : Seq[Variable] = Nil) = new DomainClass(description, properties)
+  // getter methods returning plain Java objects for free marker
+  val getName : Descriptor[DomainClass] = Descriptor(classOf[DomainClass], _description)
+  val getProperties : java.util.List[Variable] = _properties
 
 }

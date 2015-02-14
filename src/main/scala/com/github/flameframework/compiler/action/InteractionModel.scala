@@ -23,21 +23,15 @@ import scala.collection.JavaConversions._
 /**
  * Created by michel on 16-11-14.
  */
-class InteractionModel (appInfo: AppInfo,
-                        domainClasses : java.util.List[DomainClass] ,
-                        nativeActions: java.util.List[Action],
-                        composedActions : java.util.List[ComposedAction]) {
+case class InteractionModel (_appInfo: AppInfo,
+                        _domainClasses : Seq[DomainClass] ,
+                        _nativeActions: Seq[NativeAction],
+                        _composedActions : Seq[ComposedAction]) {
 
-  def getAppInfo = appInfo
-  def getDomainClasses = domainClasses
-  def getNativeActions = nativeActions
-  def getComposedActions = composedActions
-
-}
-
-object InteractionModel {
-
-  def apply(appInfo: AppInfo, domainClasses: Seq[DomainClass], nativeActions : Seq[Action], composedActions: Seq[ComposedAction]) =
-    new InteractionModel(appInfo, domainClasses, nativeActions, composedActions)
+  // getter methods returning plain Java objects for free marker
+  def getAppInfo : AppInfo = _appInfo
+  def getDomainClasses : java.util.List[DomainClass] = _domainClasses
+  def getNativeActions : java.util.List[NativeAction] = _nativeActions
+  def getComposedActions : java.util.List[ComposedAction] = _composedActions
 
 }

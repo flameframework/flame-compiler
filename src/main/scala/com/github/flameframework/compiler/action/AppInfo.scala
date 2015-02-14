@@ -3,14 +3,9 @@ package com.github.flameframework.compiler.action
 /**
  * General application info.
  */
-class AppInfo(startAction: Action) {
+case class AppInfo(_startAction: Action) {
 
-  def getStartAction = startAction
-
-}
-
-object AppInfo {
-
-  def apply(startAction: Action) = new AppInfo(startAction)
+  // getter methods returning plain Java objects for free marker
+  def getStartAction = _startAction
 
 }

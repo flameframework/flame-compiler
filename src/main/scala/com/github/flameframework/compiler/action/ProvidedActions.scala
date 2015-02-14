@@ -17,7 +17,6 @@
 package com.github.flameframework.compiler.action
 
 import com.github.flameframework.compiler.domain.{ObjectType, ListType, Variable}
-import scala.collection.JavaConversions._
 
-object ViewAction extends Action("view")
-object ListAction extends Action("list", List(Variable("objects", ListType(ObjectType))))
+case object ViewAction extends Action("view")
+case object ListAction extends Action("list", Seq(Variable("objects", ListType(ObjectType))))

@@ -23,17 +23,11 @@ import scala.collection.JavaConversions._
 /**
  * Created by michel on 16-12-14.
  */
-class ActionCall(action: Action, inputValues: java.util.List[Value], outputVariable: Variable) {
+case class ActionCall(_action: Action, _inputValues: Seq[Value] = Nil, _outputVariable: Option[Variable] = None) {
 
-  val getAction = action
-  val getInputValues = inputValues
-  val getOutputVariable = outputVariable
-
-}
-
-object ActionCall {
-
-  def apply(action: Action, inputValues: Seq[Value] = Nil, outputVariable : Option[Variable] = None) =
-    new ActionCall(action, inputValues, outputVariable.orNull)
+  // getter methods returning plain Java objects for free marker
+  val getAction : Action = _action
+  val getInputValues : java.util.List[Value] = _inputValues
+  val getOutputVariable : Variable = _outputVariable.orNull
 
 }

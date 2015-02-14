@@ -40,14 +40,14 @@ object Generator {
 
     val mails = Variable("mails", ListType(Mail))
 
-    val fetchAllMails = Action("fetch all mails", outputType = Some(ListType(Mail)))
+    val fetchAllMails = NativeAction("fetch all mails", _outputType = Some(ListType(Mail)))
 
-    val open = ComposedAction("open inbox", actionCalls = Seq(
-      ActionCall(fetchAllMails, outputVariable = Some(mails)),
+    val open = ComposedAction("open inbox", _actionCalls = Seq(
+      ActionCall(fetchAllMails, _outputVariable = Some(mails)),
       ActionCall(ListAction, Seq(mails))
     ))
 
-    val appInfo = AppInfo(startAction = open)
+    val appInfo = AppInfo(_startAction = open)
 
     generate("ios", ".", InteractionModel(
       appInfo,
