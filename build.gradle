@@ -13,6 +13,7 @@ dependencies {
   compile 'org.scala-lang:scala-library:2.11.2'
   compile 'org.freemarker:freemarker:2.3.21'
   compile 'com.github.flameframework:treemarker:1.0-SNAPSHOT'
+  compile  'org.yaml:snakeyaml:1.8'
   testCompile 'org.scalatest:scalatest_2.11:2.2.2'
   testCompile 'org.mockito:mockito-all:1.8.4'
   testCompile 'junit:junit:4.11'
