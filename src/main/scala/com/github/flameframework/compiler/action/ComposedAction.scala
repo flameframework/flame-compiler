@@ -26,7 +26,7 @@ import scala.collection.JavaConversions._
 case class ComposedAction(_description: String ,
                       _inputVariables: Seq[Variable] = Nil,
                       _outputVariable: Option[Variable] = None,
-                      _actionCalls: Seq[ActionCall]) extends Action(_description, _inputVariables, _outputVariable.map(_.getType)) {
+                      _actionCalls: Seq[ActionCall]) extends Action(_description, _inputVariables, _outputVariable.map(_._variableType)) {
 
   // getter methods returning plain Java objects for free marker
   val getActionCalls : java.util.List[ActionCall] = _actionCalls

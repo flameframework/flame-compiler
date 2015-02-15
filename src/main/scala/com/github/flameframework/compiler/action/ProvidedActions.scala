@@ -16,7 +16,7 @@
 
 package com.github.flameframework.compiler.action
 
-import com.github.flameframework.compiler.domain.{ObjectType, ListType, Variable}
+import com.github.flameframework.compiler.domain.{ObjectType, ListType, Variable, Ref}
 
 case object ViewAction extends Action("view")
-case object ListAction extends Action("list", Seq(Variable("objects", ListType(ObjectType))))
+case object ListAction extends Action("list", Seq(Variable("objects", new Ref(Some(ListType(ObjectType))))))

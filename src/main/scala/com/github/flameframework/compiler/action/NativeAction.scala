@@ -16,11 +16,11 @@
 
 package com.github.flameframework.compiler.action
 
-import com.github.flameframework.compiler.domain.{Variable, Type}
+import com.github.flameframework.compiler.domain.{Variable, Type, Ref}
 
 /**
  * Created by michel on 13-12-14.
  */
 case class NativeAction(_description: String,
                       _inputVariables: Seq[Variable] = Nil,
-                      _outputType: Option[Type] = None) extends Action(_description, _inputVariables, _outputType)
+                      _outputType: Option[Ref[Type]] = None) extends Action(_description, _inputVariables, _outputType)

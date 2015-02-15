@@ -32,22 +32,22 @@ object Generator {
 
   def main(args: Array[String]) = {
 
-    val from = Variable("from", StringType)
-    val to = Variable("to", StringType)
-    val body = Variable("body", StringType)
+    val from = Variable("from", new Ref(Some(StringType)))
+    val to = Variable("to", new Ref(Some(StringType)))
+    val body = Variable("body", new Ref(Some(StringType)))
 
     val Mail = DomainClass("mail", Seq(from, to, body))
 
-    val mails = Variable("mails", ListType(Mail))
+    val mails = Variable("mails", new Ref(Some(ListType(Mail))))
 
-    val fetchAllMails = NativeAction("fetch all mails", _outputType = Some(ListType(Mail)))
+    val fetchAllMails = NativeAction("fetch all mails", _outputType = Some(new Ref(Some(ListType(Mail)))))
 
     val open = ComposedAction("open inbox", _actionCalls = Seq(
-      ActionCall(fetchAllMails, _outputVariable = Some(mails)),
-      ActionCall(ListAction, Seq(mails))
+      ActionCall(new Ref(Some(fetchAllMails)), _outputVariable = Some(mails)),
+      ActionCall(new Ref(Some(ListAction)), Seq(mails))
     ))
 
-    val appInfo = AppInfo(_startAction = open)
+    val appInfo = AppInfo("example ios app", _startAction = new Ref(Some(open)))
 
     generate("ios", ".", InteractionModel(
       appInfo,

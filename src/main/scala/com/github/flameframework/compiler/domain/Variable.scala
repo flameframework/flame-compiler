@@ -19,11 +19,11 @@ package com.github.flameframework.compiler.domain
 /**
  * Created by michel on 30-11-14.
  */
-case class Variable(_description: String, _variableType: Type) extends Value {
+case class Variable(_description: String, _variableType: Ref[Type]) extends Value {
 
   // getter methods returning plain Java objects for free marker
   val getName = Descriptor(classOf[Variable], _description)
-  val getType = _variableType
+  val getType = _variableType.get
 
 }
 
