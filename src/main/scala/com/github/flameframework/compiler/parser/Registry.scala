@@ -42,3 +42,11 @@ class Registry[A](val objects: mutable.Map[Seq[String], Ref[A]] = mutable.Map[Se
   }
 
 }
+
+object Registry {
+
+  private def mapItem[T](kv : (String, T)) : (Seq[String], Ref[T]) = kv match { case (k, v) => split(k) -> new Ref(Some(v)) }
+
+  def apply[T](definedObjects : (String, T)*) : Registry[T] = new Registry[T](mutable.Map[Seq[String], Ref[T]](definedObjects.map(mapItem) : _*))
+
+}

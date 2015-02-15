@@ -46,4 +46,16 @@ class FlameParserTest extends FlatSpec {
     assert(parser.parsed == InteractionModel(appInfo, Seq(mail), Seq(fetchAllMails), Nil))
   }
 
+  "Yaml with a duplicate definition" should "cause an exception to be thrown" in new Fixture() {
+    intercept[FlameParserException] {
+      parser.parse(
+        """
+          app: app name
+          start action: some action
+---
+          app: duplicate definition
+          start action: some action
+        """)
+    }
+  }
 }
