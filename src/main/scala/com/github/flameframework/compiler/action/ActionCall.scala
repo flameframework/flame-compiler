@@ -16,18 +16,20 @@
 
 package com.github.flameframework.compiler.action
 
-import com.github.flameframework.compiler.domain.{Ref, Value, Variable}
+import com.github.flameframework.compiler.base.{Descriptor, Identifier}
+import com.github.flameframework.compiler.domain.{Value, Variable}
 
 import scala.collection.JavaConversions._
 
 /**
  * Created by michel on 16-12-14.
  */
-case class ActionCall(_action: Ref[Action], _inputValues: Seq[Value] = Nil, _outputVariable: Option[Variable] = None) {
+case class ActionCall(_description: Identifier, _inputValues: Seq[Value] = Nil, _outputVariable: Option[Variable] = None) {
 
   // getter methods returning plain Java objects for free marker
-  val getAction : Action = _action.get
+//  val getAction = _actionReference
+  val getName = new Descriptor[ActionCall](_description)
   val getInputValues : java.util.List[Value] = _inputValues
-  val getOutputVariable : Variable = _outputVariable.orNull
+  val getOutputVariable : Variable = _outputVariable.orNull // TODO: remove VARIABLE with simple VALUE (without TYPE!!!)
 
 }

@@ -16,6 +16,7 @@
 
 package com.github.flameframework.compiler.domain
 
+import com.github.flameframework.compiler.base.{Identifier, Descriptor}
 import org.scalatest.FlatSpec
 
 /**
@@ -24,7 +25,7 @@ import org.scalatest.FlatSpec
 class DescriptorTest extends FlatSpec {
 
   trait Fixture {
-    val descriptor = new Descriptor[DomainClass](classOf[DomainClass], Seq("three", "single", "words"))
+    val descriptor = new Descriptor[DomainClass](Identifier("three single words"))
   }
 
   "toLowerCamelCase" should "return lowerCamelCase" in new Fixture {

@@ -16,14 +16,16 @@
 
 package com.github.flameframework.compiler.domain
 
+import com.github.flameframework.compiler.base.{Descriptor, Identifier}
+
 /**
  * Created by michel on 30-11-14.
  */
-case class Variable(_description: String, _variableType: Ref[Type]) extends Value {
+case class Variable(_description: Identifier, _variableType: Type) extends Value {
 
   // getter methods returning plain Java objects for free marker
-  val getName = Descriptor(classOf[Variable], _description)
-  val getType = _variableType.get
+  val getName = new Descriptor[Variable](_description)
+  def getType = _variableType
 
 }
 

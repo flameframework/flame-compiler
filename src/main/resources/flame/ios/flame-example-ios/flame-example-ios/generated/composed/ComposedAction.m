@@ -11,7 +11,7 @@
 
 + (${action.outputType}) perform<#list action.inputVariables as input>${input.name.toUpperCamelCase}: (${input.type}) ${input.name}<#if input_has_next> </#if></#list> {
     <#list action.actionCalls as actionCall>
-    <#if actionCall.outputVariable?has_content>${actionCall.outputVariable.type} ${actionCall.outputVariable.name} = </#if>[${actionCall.action.name}Action perform<#list actionCall.action.inputVariables as inputVariable>${inputVariable.name.toUpperCamelCase}: ${actionCall.inputValues[inputVariable_index]}<#if inputVariable_has_next> </#if></#list>];
+    <#if actionCall.outputVariable?has_content>${actionCall.action.outputType} ${actionCall.outputVariable.name} = </#if>[${actionCall.action.name}Action perform<#list actionCall.action.inputVariables as inputVariable>${inputVariable.name.toUpperCamelCase}: ${actionCall.inputValues[inputVariable_index]}<#if inputVariable_has_next> </#if></#list>];
     </#list>
     <#if action.outputVariable?has_content>return ${action.outputVariable.name};</#if>
 }

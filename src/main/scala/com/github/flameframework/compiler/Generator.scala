@@ -18,6 +18,7 @@ package com.github.flameframework.compiler
 
 import com.github.flameframework.compiler.action._
 import com.github.flameframework.compiler.domain._
+import com.github.flameframework.compiler.parser.FlameParser
 import com.github.flameframework.treemarker.TreeMarker
 
 /**
@@ -26,28 +27,34 @@ import com.github.flameframework.treemarker.TreeMarker
 object Generator {
 
   def generate(platform: String, target: String, interactionModel: InteractionModel): Unit = {
-    val objectWrapper = new FlameObjectWrapper(TreeMarker.version)
+    val objectWrapper = new FlameObjectWrapper(interactionModel, TreeMarker.version)
     TreeMarker.generate(s"flame/$platform/", target, interactionModel, Some(objectWrapper))
   }
 
   def main(args: Array[String]) = {
+    val text = io.Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("example.yaml")).mkString
+    generate("ios", ".", new FlameParser().parse(text))
 
-    val from = Variable("from", new Ref(Some(StringType)))
-    val to = Variable("to", new Ref(Some(StringType)))
-    val body = Variable("body", new Ref(Some(StringType)))
+  }
+
+  def main2(args: Array[String]) = {
+
+    val from = Variable("from", StringType)
+    val to = Variable("to", StringType)
+    val body = Variable("body", StringType)
 
     val Mail = DomainClass("mail", Seq(from, to, body))
 
-    val mails = Variable("mails", new Ref(Some(ListType(Mail))))
+    val mails = Variable("mails", new ListType(DomainClassType("mail")))
 
-    val fetchAllMails = NativeAction("fetch all mails", _outputType = Some(new Ref(Some(ListType(Mail)))))
+    val fetchAllMails = NativeAction("fetch all mails", _outputType = Some(ListType(DomainClassType("Mail"))))
 
     val open = ComposedAction("open inbox", _actionCalls = Seq(
-      ActionCall(new Ref(Some(fetchAllMails)), _outputVariable = Some(mails)),
-      ActionCall(new Ref(Some(ListAction)), Seq(mails))
+      ActionCall("fetchAllMails", _outputVariable = Some(mails)),
+      ActionCall("List", Seq(mails))
     ))
 
-    val appInfo = AppInfo("example ios app", _startAction = new Ref(Some(open)))
+    val appInfo = AppInfo("example ios app", _startAction = ActionCall("openInbox"))
 
     generate("ios", ".", InteractionModel(
       appInfo,

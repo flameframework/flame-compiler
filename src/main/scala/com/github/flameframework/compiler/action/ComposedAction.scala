@@ -16,6 +16,7 @@
 
 package com.github.flameframework.compiler.action
 
+import com.github.flameframework.compiler.base.Identifier
 import com.github.flameframework.compiler.domain._
 
 import scala.collection.JavaConversions._
@@ -23,13 +24,12 @@ import scala.collection.JavaConversions._
 /**
  * Created by michel on 13-12-14.
  */
-case class ComposedAction(_description: String ,
+case class ComposedAction(_description: Identifier ,
                       _inputVariables: Seq[Variable] = Nil,
-                      _outputVariable: Option[Variable] = None,
-                      _actionCalls: Seq[ActionCall]) extends Action(_description, _inputVariables, _outputVariable.map(_._variableType)) {
+                      _outputType: Option[Type] = None,
+                      _actionCalls: Seq[ActionCall]) extends Action(_description, _inputVariables, _outputType) {
 
   // getter methods returning plain Java objects for free marker
   val getActionCalls : java.util.List[ActionCall] = _actionCalls
-  val getOutputVariable : Variable = _outputVariable.orNull
 
 }

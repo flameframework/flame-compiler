@@ -14,15 +14,16 @@
  *    limitations under the License.
  */
 
-package com.github.flameframework.compiler.domain
+package com.github.flameframework.compiler.base
 
-import com.github.flameframework.util.WordSplitter
-import WordSplitter._
+import scala.reflect._
 
 /**
  * Created by michel on 12-01-15.
  */
-class Descriptor[T](val clazz: Class[T], words: Seq[String]) {
+class Descriptor[T : ClassTag](identifier: Identifier) {
+
+  val words = identifier.words
 
   implicit class StringExtensions(s: String) {
     def toUpperCamelCase = s.substring(0, 1).toUpperCase + s.substring(1)
@@ -36,10 +37,8 @@ class Descriptor[T](val clazz: Class[T], words: Seq[String]) {
 
   def getToLowerCase = words.mkString("-")
 
-}
+  override def toString = words.mkString(" ") + " (" + clazz + ")"
 
-object Descriptor {
-
-  def apply[T](clazz: Class[T], description: String) = new Descriptor(clazz, split(description))
+  val clazz : Class[T] = classTag[T].runtimeClass.asInstanceOf[Class[T]]
 
 }

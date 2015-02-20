@@ -16,7 +16,13 @@
 
 package com.github.flameframework.compiler.action
 
-import com.github.flameframework.compiler.domain.{ObjectType, ListType, Variable, Ref}
+import com.github.flameframework.compiler.domain.{ObjectType, ListType, Variable}
 
-case object ViewAction extends Action("view")
-case object ListAction extends Action("list", Seq(Variable("objects", new Ref(Some(ListType(ObjectType))))))
+object ProvidedActions {
+
+  val providedActions = Seq(
+    NativeAction("view"),
+    NativeAction("list", Seq(Variable("objects", new ListType(ObjectType))))
+  )
+
+}

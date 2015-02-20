@@ -16,15 +16,17 @@
 
 package com.github.flameframework.compiler.domain
 
+import com.github.flameframework.compiler.base.{Identifier, Descriptor}
+
 import scala.collection.JavaConversions._
 
 /**
  * Abstract representation for a domain object.
  */
-case class DomainClass(_description: String, _properties: Seq[Variable] = Nil) extends Type {
+case class DomainClass(_description: Identifier, _properties: Seq[Variable] = Nil) {
 
   // getter methods returning plain Java objects for free marker
-  val getName : Descriptor[DomainClass] = Descriptor(classOf[DomainClass], _description)
+  val getName : Descriptor[DomainClass] = new Descriptor[DomainClass](_description)
   val getProperties : java.util.List[Variable] = _properties
 
 }

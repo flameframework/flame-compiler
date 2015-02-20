@@ -16,7 +16,9 @@
 
 package com.github.flameframework.compiler.action
 
-import com.github.flameframework.compiler.domain.DomainClass
+import com.github.flameframework.compiler.base.Identifier
+import com.github.flameframework.compiler.domain.{DomainClassType, DomainClass}
+import com.github.flameframework.compiler.action.ProvidedActions._
 
 import scala.collection.JavaConversions._
 
@@ -27,6 +29,13 @@ case class InteractionModel (_appInfo: AppInfo,
                         _domainClasses : Seq[DomainClass] ,
                         _nativeActions: Seq[NativeAction],
                         _composedActions : Seq[ComposedAction]) {
+
+  // methods for following references
+  def get(identifier: Identifier): Action =
+    providedActions.find(_._description == identifier).getOrElse(
+      _nativeActions.find(_._description == identifier).getOrElse(
+        _composedActions.find(_._description == identifier).getOrElse(
+          throw new Exception(s"Unknown action ${identifier}"))))
 
   // getter methods returning plain Java objects for free marker
   def getAppInfo : AppInfo = _appInfo
