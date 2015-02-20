@@ -1,0 +1,27 @@
+
+app:              example ios app
+start action:     open inbox
+
+---
+
+domain class:     mail
+
+properties:
+  from  :      text
+  to    :      text
+  body  :      text
+
+---
+
+action:           fetch all mails
+output type:      mail*
+
+---
+
+composed action:  open inbox
+
+action calls:
+
+  - mails = fetch all mails
+  - list(mails)
+
